@@ -10,7 +10,7 @@ services:
 
     nginx:
         image: nginx:stable-alpine
-        container_name: sdockerupermetrics_api_php_nginx
+        container_name: supermetrics_api_php_nginx
         depends_on:
             - php
         volumes:

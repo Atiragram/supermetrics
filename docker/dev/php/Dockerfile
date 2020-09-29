@@ -3,10 +3,8 @@ FROM php:7.4.6-fpm
 WORKDIR /app
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    zlib1g-dev \
     libzip-dev \
-    unzip \
-    && rm -rf /var/lib/apt/lists/*
+    unzip
 
 RUN docker-php-ext-install -j$(nproc) zip opcache
 

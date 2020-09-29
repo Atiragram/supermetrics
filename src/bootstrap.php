@@ -20,6 +20,5 @@ $containerBuilder->addDefinitions(__DIR__ . '/config.php');;
 $container = $containerBuilder->build();
 
 $postsStatisticsFetcher = $container->get(PostsStatisticsFetcher::class);
-$postsStatistics = $postsStatisticsFetcher->getSocialPlatformStatistics(1,10);
+$postsStatistics = $postsStatisticsFetcher->getSocialPlatformStatistics(1, 10);
 echo json_encode($postsStatistics);
-

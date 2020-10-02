@@ -9,13 +9,19 @@ use App\Model\Post;
 class AveragePostLength implements PostMetricInterface
 {
     private array $avgPostLengthResult = [];
+    private array $postsCountPerMonth = [];
+    private array $postsLengthPerMonth = [];
 
     public function calculate(Post $post)
     {
         $month = $post->getPostMonth();
-        $this->avgPostLengthResult[$month] = isset($this->avgPostLengthResult[$month])
-            ? round(($this->avgPostLengthResult[$month] +  $post->getPostLength()) / 2)
+        $this->postsCountPerMonth[$month] = isset($this->postsCountPerMonth[$month])
+            ? $this->postsCountPerMonth[$month] + 1
+            : 1;
+        $this->postsLengthPerMonth[$month] = isset($this->postsLengthPerMonth[$month])
+            ? $this->postsLengthPerMonth[$month] + $post->getPostLength()
             : $post->getPostLength();
+        $this->avgPostLengthResult[$month] = round($this->postsLengthPerMonth[$month] / $this->postsCountPerMonth[$month]);
     }
 
     public function getResult(): array
